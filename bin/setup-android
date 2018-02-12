@@ -1,0 +1,16 @@
+#!/bin/bash
+
+brew cask install java
+brew cask install android-studio
+brew cask install android-sdk
+brew cask install android-ndk
+brew cask install gradle
+
+echo "Add the following:"
+echo "--------------------------------------------"
+echo "export ANDROID_SDK_ROOT=/usr/local/share/android-sdk"
+echo "export ANDROID_HOME=/usr/local/share/android-sdk"
+echo "export ANDROID_NDK_HOME=/usr/local/share/android-ndk"
+echo "export PATH=\$PATH:${ANDROID_HOME}/tools"
+echo "export PATH=\$PATH:${ANDROID_HOME}/platform-tools"
+echo "--------------------------------------------"
