@@ -1,0 +1,8 @@
+add-ons;addon-google_apis-google-23
+platforms;android-23
+sources;android-23
+system-images;android-23;default;x86_64
+system-images;android-23;google_apis;x86_64
+build-tools;23.0.1
+extras;intel;Hardware_Accelerated_Execution_Manager
+extras;android;m2repository
