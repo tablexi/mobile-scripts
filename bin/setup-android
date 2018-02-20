@@ -5,6 +5,8 @@ brew cask install android-studio
 brew cask install android-sdk
 brew cask install android-ndk
 brew cask install android-platform-tools
+brew install maven
+brew install gradle 
 
 echo "== Setting up HAXM"
 find /usr/local/share/android-sdk/extras -name "silent_install.sh" | xargs sudo
