@@ -13,7 +13,7 @@ echo 'n' | avdmanager create avd -n Api26 --package "system-images;android-26;go
 echo "Add the following to your environment file:
 --------------------------------------------
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
-export ANDROID_HOME_ROOT=\$ANDROID_SDK_ROOT
+export ANDROID_HOME=\$ANDROID_SDK_ROOT
 export ANDROID_NDK_HOME=\$ANDROID_SDK_ROOT/ndk-bundle
 
 export PATH=\$PATH:\$ANDROID_SDK_ROOT/emulator
