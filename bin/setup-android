@@ -1,40 +1,19 @@
 #!/bin/bash
 
 brew cask install java8
-brew cask install android-studio
 brew cask install android-sdk
-brew cask install android-ndk
-brew cask install android-platform-tools
-brew install maven
-brew install gradle 
 
-echo "== Setting up HAXM"
-find /usr/local/share/android-sdk/extras -name "silent_install.sh" | xargs sudo
-
-echo "== Setting up gradle properties"
-mkdir -p ~/.gradle
-echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
-
-echo "== Installing Android packages"
-yes | sdkmanager --package_file=./bin/android_packages --verbose
+echo "== Updating Android Packages"
+yes | sdkmanager --update
+yes | sdkmanager $(cat bin/android_packages)
 
 echo "== Creating virtual device"
-avdmanager create avd -n Nexus5 -k "system-images;android-23;google_apis;x86_64" -d "Nexus 5" --abi google_apis/x86_64 --force
-cp bin/nexus-5-config-ini ~/.android/avd/Nexus5.avd/config.ini
+echo 'n' | avdmanager create avd -n Api26 --package "system-images;android-26;google_apis;x86_64" --force
 
 echo "Add the following to your environment file:
 --------------------------------------------
-export ANT_HOME=/usr/local/opt/ant
-export MAVEN_HOME=/usr/local/opt/maven
-export GRADLE_HOME=/usr/local/opt/gradle
-export ANDROID_HOME=/usr/local/share/android-sdk
-export ANDROID_NDK_HOME=/usr/local/share/android-ndk
-export INTEL_HAXM_HOME=/usr/local/Caskroom/intel-haxm
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 
-export PATH=\$ANT_HOME/bin:\$PATH
-export PATH=\$MAVEN_HOME/bin:\$PATH
-export PATH=\$GRADLE_HOME/bin:\$PATH
-export PATH=\$ANDROID_HOME/tools:\$PATH
-export PATH=\$ANDROID_HOME/platform-tools:\$PATH
-export PATH=\$ANDROID_HOME/build-tools/23.0.1:\$PATH
+export PATH=\$PATH:\$ANDROID_SDK_ROOT/emulator
+export PATH=\$PATH:\$ANDROID_SDK_ROOT/tools
 --------------------------------------------"
