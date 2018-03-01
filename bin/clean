@@ -1,18 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env ruby
+require 'colorize'
 
-# cleans all the caches we know about so far
+puts "Cleaning all react-native caches we know about so far..."
 
-watchman watch-del-all
-rm -rf $TMPDIR/react-*
-rm ~/.babel.json
-rm -rf ~/.rncache
-rm -rf ios/build
-rm -rf node_modules/
-npm cache clean --force
-npm install
+def run(cmd)
+  puts cmd.cyan + ' ' + `#{cmd}`
+end
+
+run "watchman watch-del-all"
+run "rm -rf $TMPDIR/react-*"
+run "rm ~/.babel.json"
+run "rm -rf ~/.rncache"
+run "rm -rf ios/build"
+run "rm -rf node_modules/"
+run "npm cache clean --force"
+run "npm install"
 
 #this is important - the cache needs to be reloaded manually
-echo "manually refreshing packages..."
-npx concurrently --kill-others "npm run start -- --reset-cache" "sleep 10 && curl http://localhost:8081/index.bundle?platform=ios&dev=true"  > /dev/null
+puts "Manually refreshing packages..."
+pid = Process.spawn "npm run start -- --reset-cache"
+sleep(10)
+run "curl http://localhost:8081/index.bundle?platform=ios&dev=true > /dev/null"
 
-echo "done"
+puts "Clean finished 🚀".green
+

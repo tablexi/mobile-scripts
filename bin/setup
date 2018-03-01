@@ -1,5 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-bin/setup-ios
-bin/setup-android
-bin/setup-react-native
+platforms = ['ios', 'android', 'react-native']
+bin_dir = File.expand_path(File.dirname(__FILE__))
+
+args =  ARGV
+args = platforms if args.empty?
+puts "Installing platforms: #{args}"
+
+args.each do |p| 
+  puts `#{bin_dir}/setup-#{p}` 
+end
+puts "Setup finished 🚀".green
