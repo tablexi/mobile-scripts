@@ -4,14 +4,14 @@
 
 First install [homebrew][1], [ruby][3], and [Xcode][2]. 
 
-`setup` will setup iOS, Android and React Native environments.
-If you only need a specific environment, `setup-android`, `setup-ios`, and `setup-react-native` can be used individually.
+`bundle exec setup` will setup iOS, Android and React Native environments.
+If you only need a specific environment, `setup android`, `setup ios`, and `setup react-native` can be used individually.
 
 ## Development scripts
 
 ### React Native:
 
-- `clean` tries to wipe the collection of caches in the react-native dev environment by:
+`bundle exec clean` tries to wipe the collection of caches in the react-native dev environment by:
   1. Reset `watchman`
   2. Remove anything prefixed with `react-` in the temp directory
   3. Remove `~/.babel.json`
@@ -21,7 +21,7 @@ If you only need a specific environment, `setup-android`, `setup-ios`, and `setu
   7. Clean the `npm` cache
   8. Run `npm install`, start the packager with the `--reset-cache` flag, and manually hit the packager url once it's running. 
 
-- `start-dev` is an attempt to simplify the multiple commands needed to start the app. It takes a platform and a virtual device name if `android` is specified:
+`bundle exec start-dev` is an attempt to simplify the multiple commands needed to start the app. It takes a platform and a virtual device name if `android` is specified:
   - `start-dev ios`
   - `start-dev android Nexus5`
   
