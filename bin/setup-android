@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+brew tap caskroom/cask
+brew cask install java8
+brew cask install android-sdk
+
+echo "== Updating Android Packages"
+
+yes | sdkmanager --update
+touch ~/.android/repositories.cfg
+yes | sdkmanager $(cat lib/android_packages)
+
+echo "== Creating virtual device"
+echo 'n' | avdmanager create avd -n Api26 --package "system-images;android-26;google_apis;x86_64" --force --device "Nexus 5"
+
+echo "Add the following to your environment file:
+--------------------------------------------
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+export ANDROID_HOME=\$ANDROID_SDK_ROOT
+export ANDROID_NDK_HOME=\$ANDROID_SDK_ROOT/ndk-bundle
+
+export PATH=\$PATH:\$ANDROID_SDK_ROOT/emulator
+export PATH=\$PATH:\$ANDROID_SDK_ROOT/tools
+export PATH=\$PATH:\$ANDROID_SDK_ROOT/platform-tools
+--------------------------------------------"

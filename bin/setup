@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bin/setup-ios
+bin/setup-android
+bin/setup-react-native

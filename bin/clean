@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# cleans all the caches we know about so far
+
+watchman watch-del-all
+rm -rf $TMPDIR/react-*
+rm ~/.babel.json
+rm -rf ~/.rncache
+rm -rf ios/build
+rm -rf node_modules/
+npm cache clean --force
+npm install
+
+#this is important - the cache needs to be reloaded manually
+echo "manually refreshing packages..."
+npx concurrently --kill-others "npm run start -- --reset-cache" "sleep 10 && curl http://localhost:8081/index.bundle?platform=ios&dev=true"  > /dev/null
+
+echo "done"
