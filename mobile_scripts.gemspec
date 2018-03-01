@@ -6,5 +6,12 @@ Gem::Specification.new do |spec|
   spec.summary       = 'A collection of scripts frequently used on mobile projects at Table XI.'
   spec.files         = Dir.glob('{bin,lib}/**/*')
   spec.bindir        = 'bin'
-  spec.executables   = Dir.glob('{bin}/**/*')
+  spec.executables   = [
+    'clean',
+    'setup',
+    'setup-android',
+    'setup-ios',
+    'setup-react-native',
+    'start-dev'
+  ]
 end
