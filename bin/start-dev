@@ -8,7 +8,7 @@ if !platform
   exit
 elsif platform == 'android' && !emulator
   puts "No emulator specified. Existing emulators: (avdmanager list avd)"
-  puts `avdmanager list avd`
+  system "avdmanager list avd"
   exit
 end
 begin
@@ -20,8 +20,8 @@ begin
     sleep(5)
   end
   
-  puts `react-native run-#{platform}`
-  puts `open http://localhost:7007`
+  system "react-native run-#{platform}"
+  system "open http://localhost:7007"
   Process.wait(pid)
 rescue Exception => ex
   puts "================== Error, stopping dev script ========================"

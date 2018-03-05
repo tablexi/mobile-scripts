@@ -4,7 +4,8 @@ require 'colorize'
 puts "Cleaning all react-native caches we know about so far..."
 
 def run(cmd)
-  puts cmd.cyan + ' ' + `#{cmd}`
+  puts cmd.cyan 
+  system "#{cmd}"
 end
 
 run "watchman watch-del-all"
@@ -21,7 +22,6 @@ run "npm install"
 puts "Manually refreshing packages..."
 pid = Process.spawn "npm run start -- --reset-cache"
 sleep(10)
-run "curl http://localhost:8081/index.bundle?platform=ios&dev=true > /dev/null"
-
+run "curl --output /dev/null --silent http://localhost:8081/index.bundle?platform=ios&dev=true"
 puts "Clean finished 🚀".green
 
