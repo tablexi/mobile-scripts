@@ -12,16 +12,17 @@ run "watchman watch-del-all"
 run "rm -rf $TMPDIR/react-*"
 run "rm ~/.babel.json"
 run "rm -rf ~/.rncache"
+
 run "rm -rf ios/build"
 run "rm -rf ios/Pods"
+run "rm -rf ios/*.xcworkspace"
+
+run "cd android ./gradlew clean && cd .."
+run "rm -rf android/build"
+run "rm -rf android/app/build"
+
 run "rm -rf node_modules/"
+run "yarn cache clean"
 run "npm cache clean --force"
-run "npm install"
 
-#this is important - the cache needs to be reloaded manually
-puts "Manually refreshing packages..."
-pid = Process.spawn "npm run start -- --reset-cache"
-sleep(10)
-run "curl --output /dev/null --silent http://localhost:8081/index.bundle?platform=ios&dev=true"
-puts "Clean finished 🚀".green
-
+puts "Clean finished 🚀 run:\n  npm install or yarn".green

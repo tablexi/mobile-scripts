@@ -10,6 +10,6 @@ puts "Installing platforms: #{args}"
 
 args.each do |p| 
   cmd = "#{bin_dir}/setup-#{p} #{bin_dir}"
-  puts system "#{cmd}"
+  abort "Setup failed".red if !system "#{cmd}"
 end
 puts "Setup finished 🚀".green
