@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'colorize'
   spec.executables   = [
     'clean',
-    'setup',
-    'start-dev'
+    'setup'
   ]
 end

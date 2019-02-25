@@ -1,27 +1,34 @@
 #!/usr/bin/env bash
 
-set -o
+set -eo
 
+set INSTALLED="$(brew cask list | grep -w java)"
 echo "== Installing android"
+if [ -n "$INSTALLED" ]
+then
+  echo -e "The wrong version of java is installed, please uninstall java: brew cask uninstall java"
+  exit 1
+fi
+
 brew tap caskroom/cask
 brew cask install java8
 brew cask install android-sdk
 
 echo "== Updating Android Packages"
 yes | sdkmanager --update
-touch ~/.android/repositories.cfg
+mkdir ~/.android || true
+touch ~/.android/repositories.cfg || true
 yes | sdkmanager $(cat $1/../lib/android_packages)
 
 echo "== Creating virtual device"
 echo 'n' | avdmanager create avd -n Api26 --package "system-images;android-26;google_apis;x86_64" --force --device "Nexus 5"
 
-echo "Add the following to your environment file:
+echo 'Add the following to your environment file:
 --------------------------------------------
-export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
-export ANDROID_HOME=\$ANDROID_SDK_ROOT
-export ANDROID_NDK_HOME=\$ANDROID_SDK_ROOT/ndk-bundle
+export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
+export PATH="$ANDROID_SDK_ROOT/emulator:$PATH"
 
-export PATH=\$PATH:\$ANDROID_SDK_ROOT/emulator
-export PATH=\$PATH:\$ANDROID_SDK_ROOT/tools
-export PATH=\$PATH:\$ANDROID_SDK_ROOT/platform-tools
---------------------------------------------"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export ANDROID_NDK_HOME="$ANDROID_SDK_ROOT/ndk-bundle"
+--------------------------------------------'
