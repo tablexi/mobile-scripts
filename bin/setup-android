@@ -11,7 +11,7 @@ then
 fi
 
 brew tap caskroom/cask
-brew cask install java8
+brew cask install homebrew/cask-versions/adoptopenjdk8
 brew cask install android-sdk
 
 echo "== Updating Android Packages"
