@@ -3,3 +3,4 @@ platforms;android-28
 build-tools;28.0.3
 ndk-bundle
 emulator
+platform-tools

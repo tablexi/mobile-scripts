@@ -21,7 +21,7 @@ touch ~/.android/repositories.cfg || true
 yes | sdkmanager $(cat $1/../lib/android_packages)
 
 echo "== Creating virtual device"
-echo 'n' | avdmanager create avd -n Api26 --package "system-images;android-26;google_apis;x86_64" --force --device "Nexus 5"
+echo 'n' | avdmanager create avd -n Nexus5 --package "system-images;android-28;google_apis;x86_64" --force --device "Nexus 5"
 
 echo 'Add the following to your environment file:
 --------------------------------------------
