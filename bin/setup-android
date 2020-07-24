@@ -10,7 +10,7 @@ then
   exit 1
 fi
 
-brew tap caskroom/cask
+brew tap homebrew/cask-cask
 
 brew tap AdoptOpenJDK/openjdk
 brew cask install adoptopenjdk/openjdk/adoptopenjdk8
