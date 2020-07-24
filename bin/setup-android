@@ -30,7 +30,7 @@ yes | sdkmanager "emulator"
 yes | sdkmanager "platform-tools"
 
 echo "== Creating virtual device"
-echo 'n' | avdmanager create avd -n Nexus5 --package "system-images;android-28;google_apis;x86_64" --force --device "Nexus 5"
+echo 'n' | avdmanager create avd -n Nexus5 --package "system-images;android-28;default;x86_64" --force --device "Nexus 5"
 
 echo 'Add the following to your environment file:
 --------------------------------------------
