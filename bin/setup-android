@@ -2,19 +2,19 @@
 
 set -eo
 
-set INSTALLED="$(brew cask list | grep -w java)"
+set INSTALLED="$(brew list --cask | grep -w java)"
 echo "== Installing android"
 if [ -n "$INSTALLED" ]
 then
-  echo -e "The wrong version of java is installed, please uninstall java: brew cask uninstall java"
+  echo -e "The wrong version of java is installed, please uninstall java: brew uninstall java --cask"
   exit 1
 fi
 
 brew tap homebrew/cask
 
 brew tap AdoptOpenJDK/openjdk
-brew cask install adoptopenjdk/openjdk/adoptopenjdk8
-brew cask install android-sdk
+brew install adoptopenjdk/openjdk/adoptopenjdk8  --cask
+brew install android-sdk --cask
 
 
 echo "== Updating Android Packages"
